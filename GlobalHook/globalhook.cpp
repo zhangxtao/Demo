@@ -122,6 +122,9 @@ LRESULT CALLBACK MouseProc(
 {
     PMOUSEHOOKSTRUCT pmshs = reinterpret_cast<PMOUSEHOOKSTRUCT>(lParam);
     xHook->onMuoseEvent(pmshs);
+    // 消息屏蔽掉 系统将无法处理本次操作 用于屏蔽操作
+//    return true;
+    // 继续将消息还给系统 系统也将正常的处理该消息
     return CallNextHookEx(g_hMouseHook,nCode,wParam,lParam);
 }
 
