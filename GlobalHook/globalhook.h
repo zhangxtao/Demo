@@ -6,7 +6,24 @@
 #include <QMutex>
 #include <QSharedPointer>
 #include <windows.h>
-#include <QDebug>
+
+/**
+  1、调用时 需将编译出来的.lib 和 .dll文件放入 .exe文件夹目录下
+  2、调用工程文件需要添加对应的.lib文件路径到pro文件中
+    LIBS += .../XXX.lib
+  3、包含头文件 即可进行调用dll文件
+
+  main.cpp中直接调用
+  xHook.installMouseHook();
+  xHook.installKeyHook();
+  然后关联信号与槽函数
+  connect;
+
+  最后释放相应的hook
+
+  全局键盘钩子 在钩取其他进程的某些按键时  会被杀毒软件当做是木马 给拦截
+
+  */
 
 #if defined(GLOBALHOOK_LIBRARY)
 #  define GLOBALHOOKSHARED_EXPORT Q_DECL_EXPORT

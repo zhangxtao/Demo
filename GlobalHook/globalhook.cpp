@@ -48,7 +48,6 @@ QSharedPointer<GlobalHook> &GlobalHook::instance()
 
 bool GlobalHook::installMouseHook()
 {
-    qDebug() << "installMouseHook";
     g_hMouseHook = SetWindowsHookEx(WH_MOUSE_LL,(HOOKPROC)MouseProc,g_hInstance,0);
     return Q_LIKELY(g_hMouseHook);
 }
