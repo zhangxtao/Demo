@@ -4,15 +4,32 @@
 #include <QObject>
 #include <windows.h>
 #include <QDebug>
+#include <QThread>
+
+/**
+ *
+ *  调用方法
+ * // 获取对象
+ *  singletonHook = Hook::GetSingletonHook();
+ * // 初始化
+ *  singletonHook->InitHook();
+ *
+ * // 释放钩子对象
+ * singletonHook->RelreaseHook();
+ *
+ */
+
 
 LRESULT CALLBACK SingletonHook(int n_Code, WPARAM wParam, LPARAM lParam);
 
-// 单例钩子 线程级钩子
+// 单例钩子 线程钩子
 class Hook : public QObject
 {
     Q_OBJECT
 public:
-    static Hook &GetSingletonHook();
+    Hook(QObject *parent = 0);
+    ~Hook();
+    static Hook *GetSingletonHook();
 
     void InitHook();
     void RelreaseHook();
@@ -23,8 +40,8 @@ signals:
 public slots:
 
 private:
-    Hook(QObject *parent = 0);
-    static Hook singletonHook;
+
+    static Hook *singletonHook;
     bool m_bHookState;
 };
 
